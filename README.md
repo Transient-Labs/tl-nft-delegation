@@ -16,6 +16,9 @@ To start, the Transient Labs NFT Delegation Registry just checks [delegate.xyz v
 ### Immutable by Design
 The registry we create follows a specific interface `src/ITlNftDelegationRegistry.sol`. However, we are not making the implementation upgradeable and rather will build our creator contracts to be able to migrate registries in the future.
 
+## How This Registry Should Be Used
+This registry MUST NEVER be used for any on-chain functionality that affects NFT ownership. As an example, delegates MUST NOT be able transfer or sell tokens on behalf of the token owner. ERC-721 and ERC-1155 already have mechanisms in place to handle this. Future token standards will also have those provisions in place.s
+
 ## Disclaimer
 This codebase is provided on an "as is" and "as available" basis.
 
