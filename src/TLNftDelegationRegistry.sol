@@ -39,7 +39,7 @@ contract TLNftDelegationRegistry is Ownable, Pausable, ITLNftDelegationRegistry 
         if (paused()) {
             return false;
         } else {
-            try delegateRegistry.checkDelegateForERC721(delegate, vault, nftContract, tokenId, 0) returns (
+            try delegateRegistry.checkDelegateForERC721(delegate, vault, nftContract, tokenId, bytes32(0)) returns (
                 bool isDelegated
             ) {
                 return isDelegated;
@@ -58,7 +58,7 @@ contract TLNftDelegationRegistry is Ownable, Pausable, ITLNftDelegationRegistry 
         if (paused()) {
             return false;
         } else {
-            try delegateRegistry.checkDelegateForERC1155(delegate, vault, nftContract, tokenId, 0) returns (
+            try delegateRegistry.checkDelegateForERC1155(delegate, vault, nftContract, tokenId, bytes32(0)) returns (
                 uint256 delegatedBalance
             ) {
                 bool isDelegated = delegatedBalance > 0 ? true : false;
