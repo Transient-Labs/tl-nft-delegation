@@ -1,0 +1,36 @@
+# include .env file and export its env vars
+# (-include to ignore error if it does not exist)
+-include .env
+
+# Clean the repo
+clean:
+	forge clean
+
+# Remove the modules
+remove:
+	rm -rf .gitmodules && rm -rf .git/modules/* && rm -rf lib && touch .gitmodules
+
+# Install the modules
+install:
+	forge install foundry-rs/forge-std --no-commit
+	forge install OpenZeppelin/openzeppelin-contracts@v5.0.1 --no-commit
+
+# Updatee the modules
+update: remove install
+
+# Builds
+build:
+	forge fmt && forge clean && forge build
+
+# Tests
+quick_test:
+	forge test
+
+gas_test:
+	forge test --gas-report
+
+fuzz_test:
+	forge test --fuzz-runs 10000
+
+coverage_test:
+	forge coverage
