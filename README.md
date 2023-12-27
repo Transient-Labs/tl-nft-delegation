@@ -7,9 +7,11 @@ NFT security is one of the biggest concerns in our space. As such, most people k
 Transient Labs contracts have features that are unique and provide more utlity to NFT owners. To start, we initially required the NFT owner to send the transaction to either add a story inscription, accept a metadata update, or something else. Looking towards the future, with NFT security in mind, we want to create a universal interface for Transient Labs contracts to check NFT ownership delegations.
 
 ## Solution
-NFT delegation is not new. [delegate.xyz](https://delegate.xyz) has done a good job of bringing NFT delegation to the market and many projects are integrating with it for allowlisting, airdrops, etc. There are also other products coming to the market outside of delegate.xyz. For example, Punk 6529 and his team have created their own delegation registry, that admittedly is more complex, but allows for more fine-grained control. This registry is used for all memecard drops from 6529.
+NFT delegation is not new. [delegate.xyz](https://delegate.xyz) has done a good job of bringing NFT delegation to the market and many projects are integrating with it for allowlisting, airdrops, etc. There are also other products coming to the market outside of delegate.xyz. For example, Punk 6529 and his team have created their own delegation registry, [NFTDelegation](https://docs.nftdelegation.com/), that allows for more fine-grained control. This registry is used for all memecard drops from 6529.
 
 The purpose of this NFT Delegation Registry is not to sping up our own version, but rather to provide a universal interface that our contracts can call, without having to worry about what delegation solutions are being checked under the hood. We think that there will be many delegation solutions in the future and want to support them all.
+
+To start, the Transient Labs NFT Delegation Registry just checks [delegate.xyz v2](https://docs.delegate.xyz/delegate/upgrade-to-v2/v2-is-a-separate-contract). We considered supporting NFTDelegation, however, we have several questions and concerns and are in discussion with that team to address prior to integrating into this project.
 
 ### Immutable by Design
 The registry we create follows a specific interface `src/ITlNftDelegationRegistry.sol`. However, we are not making the implementation upgradeable and rather will build our creator contracts to be able to migrate registries in the future.
