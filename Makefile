@@ -51,8 +51,13 @@ deploy_arbitrum_sepolia: build
 	@bash print_and_clean.sh
 
 deploy_base_sepolia: build
-	# forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url base_sepolia --ledger --sender ${SENDER} --broadcast
+	forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url base_sepolia --ledger --sender ${SENDER} --broadcast
 	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --verifier-url https://api-sepolia.basescan.org/api --etherscan-api-key ${BASESCAN_KEY} --watch --constructor-args ${CONSTRUCTOR_ARGS}
+	@bash print_and_clean.sh
+
+deploy_shape_sepolia: build
+	forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url shape_sepolia --ledger --sender ${SENDER} --broadcast
+	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --verifier blockscout --verifier-url https://explorer-sepolia.shape.network/api --watch --constructor-args ${CONSTRUCTOR_ARGS}
 	@bash print_and_clean.sh
 
 deploy_mainnet: build
