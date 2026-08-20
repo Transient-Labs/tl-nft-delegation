@@ -60,6 +60,11 @@ deploy_shape_sepolia: build
 	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --verifier blockscout --verifier-url https://explorer-sepolia.shape.network/api --watch --constructor-args ${CONSTRUCTOR_ARGS}
 	@bash print_and_clean.sh
 
+deploy_robinhood_testnet: build
+	forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url robinhood_testnet --ledger --sender ${SENDER} --broadcast
+	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --verifier blockscout --verifier-url https://explorer.testnet.chain.robinhood.com/api --watch --constructor-args ${CONSTRUCTOR_ARGS}
+	@bash print_and_clean.sh
+
 deploy_mainnet: build
 	forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url mainnet --ledger --sender ${SENDER} --broadcast
 	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --chain mainnet --watch --constructor-args ${CONSTRUCTOR_ARGS}
@@ -73,4 +78,14 @@ deploy_arbitrum_one: build
 deploy_base: build
 	forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url base --ledger --sender ${SENDER} --broadcast
 	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --chain base --watch --constructor-args ${CONSTRUCTOR_ARGS}
+	@bash print_and_clean.sh
+
+deploy_shape: build
+	forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url shape --ledger --sender ${SENDER} --broadcast
+	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --verifier blockscout --verifier-url https://internal-shaper-explorer.alchemypreview.com/api --watch --constructor-args ${CONSTRUCTOR_ARGS}
+	@bash print_and_clean.sh
+
+deploy_robinhood: build
+	forge script script/Deploy.s.sol:Deploy --evm-version paris --rpc-url robinhood --ledger --sender ${SENDER} --broadcast
+	forge verify-contract $$(cat out.txt) src/TLNftDelegationRegistry.sol:TLNftDelegationRegistry --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api --watch --constructor-args ${CONSTRUCTOR_ARGS}
 	@bash print_and_clean.sh
